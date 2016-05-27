@@ -26,9 +26,12 @@ int 	init_termcaps()
 	}
 	if (tcgetattr(0, &term) == -1)
 		ft_erreur("tcgetattr");
-	term.c_lflag = ECHO;
-	if (tcsetattr(0, TCSADRAIN, &term) == -1)
+	term.c_lflag = term.c_lflag & (~ICANON & ~ECHO);
+	term.c_cc[VMIN] = 1;
+	term.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSADRAIN, &term))
 		return (-1);
+	return (0);
 }
 
 void	fix_termcaps()

@@ -31,6 +31,7 @@
 /* WRITE */
 # include <unistd.h>
 
+# define BUF_SIZE 1500
 //get back parse line
 typedef struct			s_parse
 {
